@@ -36,10 +36,10 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         build-argsbuild-args: |
-          NODE_VERSION=${{node_version}}
-          FULL_NODE_VERSION=${{full_node_version}}
-          TERRAFORM_VERSION=${{terraform_version}}
-          TERRAGRUNT_VERSION=${{terragrunt_version}}
+          NODE_VERSION=${node_version}
+          FULL_NODE_VERSION=${full_node_version}
+          TERRAFORM_VERSION=${terraform_version}
+          TERRAGRUNT_VERSION=${terragrunt_version}
         context: .
         file: ./Dockerfile
         push: true
