@@ -1,19 +1,21 @@
-name: Build & Test
+name: Publish Docker image
 on:
   push:
     branches:
-    - init-docker-image
+    - master
 jobs:
   build:
     strategy:
       matrix:
-        # node_version: [ 14, 16, 18 ]
-        # node_version: [ 18 ]
         include:
-#        - node_version: 14
-#          full_node_version: v14.21.0
-#        - node_version: 16
-#          full_node_version: v16.18.0
+        - node_version: 14
+          full_node_version: v14.21.0
+          terraform_version: 1.3.3
+          terragrunt_version: 0.39.2
+        - node_version: 16
+          full_node_version: v16.18.0
+          terraform_version: 1.3.3
+          terragrunt_version: 0.39.2
         - node_version: 18
           full_node_version: v18.12.0
           terraform_version: 1.3.3
@@ -44,4 +46,4 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/node_alpine_dind:latest
+        tags: ${{ secrets.DOCKER_HUB_USERNAME }}/nodejs_devops:${{ matrix.node_version }}
