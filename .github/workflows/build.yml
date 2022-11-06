@@ -9,13 +9,13 @@ jobs:
       matrix:
         # node_version: [ 14, 16, 18 ]
         node_version: [ 18 ]
-      include:
-      - node_version: 14
-        full_node_version: v14.21.0
-      - node_version: 16
-        full_node_version: v16.18.0
-      - node_version: 18
-        full_node_version: v18.12.0
+        include:
+        - node_version: 14
+          full_node_version: v14.21.0
+        - node_version: 16
+          full_node_version: v16.18.0
+        - node_version: 18
+          full_node_version: v18.12.0
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
