@@ -22,9 +22,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: yarn install --frozen-lockfile
-    - run: sh ./scripts/download.sh node-linux-x64-musl.tar.gz https://unofficial-builds.nodejs.org/download/release/${full_node_version}/node-${full_node_version}-linux-x64-musl.tar.gz
-    - run: sh ./scripts/download.sh terraform_linux_amd64.zip https://releases.hashicorp.com/terraform/${terraform_version}/terraform_${terraform_version}_linux_amd64.zip
-    - run: sh ./scripts/download.sh terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v${terragrunt_version}/terragrunt_linux_amd64
+    - run: sh ./scripts/download.sh node-linux-x64-musl.tar.gz https://unofficial-builds.nodejs.org/download/release/${{ matrix.full_node_version }}/node-${{ matrix.full_node_version }}-linux-x64-musl.tar.gz
+    - run: sh ./scripts/download.sh terraform_linux_amd64.zip https://releases.hashicorp.com/terraform/${{ matrix.terraform_version }}/terraform_${{ matrix.terraform_version }}_linux_amd64.zip
+    - run: sh ./scripts/download.sh terragrunt https://github.com/gruntwork-io/terragrunt/releases/download/v${{ matrix.terragrunt_version }}/terragrunt_linux_amd64
     - name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
@@ -36,10 +36,11 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         build-args: |
-          NODE_VERSION=${node_version}
-          FULL_NODE_VERSION=${full_node_version}
-          TERRAFORM_VERSION=${terraform_version}
-          TERRAGRUNT_VERSION=${terragrunt_version}
+          NODE_VERSION=${{ matrix.node_version }}
+          FULL_NODE_VERSION=${{ matrix.full_node_version }}
+          TERRAFORM_VERSION=${{ matrix.terraform_version }}
+          TERRAGRUNT_VERSION=${{ matrix.terragrunt_version }}
+          PULUMI_VERSION=test
         context: .
         file: ./Dockerfile
         push: true
