@@ -1,8 +1,12 @@
 # Nodejs Devops docker image
 
+[Docker image link](https://hub.docker.com/r/zenbeni/nodejs_devops)
+
 ## Description
 
-CI images with docker in docker as base (dind20, alpine 3.16), with nodejs installation for alpine (musl compatible installation), yarn, Terraform, Terragrunt, AWS CLI V2, Ansible, python3.
+CI images with `docker in docker` as base (dind20, alpine 3.16), with `nodejs` installation for alpine (musl compatible installation), `yarn`, `Terraform`, `Terragrunt`, `AWS CLI V2` (compiled for Alpine linux), `Ansible`, `python3`.
+
+This image enables easy nodejs CI jobs as `docker-compose` is for instance available, pushing to `AWS` is also possible with AWS CLI V2 and terraform/terragrunt.
 
 ## Versions
 
