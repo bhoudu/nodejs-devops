@@ -7,15 +7,20 @@ jobs:
   build:
     strategy:
       matrix:
-        NODE_VERSION: [ 14, 16, 18 ]
-        FULL_NODE_VERSION: [ v14.21.0, v16.18.0, v18.12.0 ]
+        # node_version: [ 14, 16, 18 ]
+        node_version: [ 18 ]
+      include:
+      - node_version: 14
+        full_node_version: v14.21.0
+      - node_version: 16
+        full_node_version: v16.18.0
+      - node_version: 18
+        full_node_version: v18.12.0
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
     - run: yarn install --frozen-lockfile
-    - run: sh ./scripts/download.sh node-linux-x64-musl.tar.gz https://unofficial-builds.nodejs.org/download/release/${FULL_NODE_VERSION}/node-${FULL_NODE_VERSION}-linux-x64-musl.tar.gz
-      env:
-        NODE_ENV: test
+    - run: sh ./scripts/download.sh node-linux-x64-musl.tar.gz https://unofficial-builds.nodejs.org/download/release/${full_node_version}/node-${full_node_version}-linux-x64-musl.tar.gz
     - run: sh ./scripts/download.sh terraform_linux_amd64.zip https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
       env:
         TERRAFORM_VERSION: 1.3.3
