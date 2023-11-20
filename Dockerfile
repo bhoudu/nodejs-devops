@@ -50,7 +50,11 @@ RUN apk update
 RUN apk upgrade --available
 RUN apk add --no-cache curl wget zip tar python3 py3-pip git openssl openssh-client jq
 RUN apk add --no-cache bash tar gzip openrc yarn ansible
-RUN pip3 install --upgrade pip docker-compose yq --ignore-installed distlib
+RUN pip3 install --upgrade pip --ignore-installed distlib
+RUN pip3 install --upgrade yq --ignore-installed distlib
+# https://github.com/docker/compose/issues/11168#issuecomment-1800362132
+RUN pip install pyyaml==5.3.1
+RUN pip3 install --upgrade --no-cache-dir docker-compose
 RUN rm -rf /var/cache/apk/*
 RUN ansible --version
 
