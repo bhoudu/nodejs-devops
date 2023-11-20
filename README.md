@@ -14,6 +14,7 @@ There are 3 images for every supported nodejs runtimes (only nodejs 14, 16 and 1
 - nodejs_devops:14
 - nodejs_devops:16
 - nodejs_devops:18
+- nodejs_devops:20
 
 ## Docker image content
 
